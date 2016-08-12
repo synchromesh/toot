@@ -67,11 +67,5 @@ set."
   #+:cmu
   (setf (lisp::fd-stream-timeout (usocket:socket-stream usocket))
         (coerce read-timeout 'integer))
-  #+lispworks
-  (when read-timeout
-    (setf (stream:stream-read-timeout (usocket:socket-stream usocket)) read-timeout))
-  #+lispworks
-  (when write-timeout
-    (setf (stream:stream-write-timeout (usocket:socket-stream usocket)) write-timeout))
-  #-(or :clisp :ecl :openmcl :sbcl :cmu :lispworks)
+  #-(or :clisp :ecl :openmcl :sbcl :cmu)
   (not-implemented 'set-timeouts))
